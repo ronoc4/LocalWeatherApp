@@ -1,0 +1,21 @@
+body {
+    /*background-image: url("http://www.somersetcountygazette.co.uk/resources/images/4216738.jpg?display=1&htype=0&type=mc3"); */
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+
+section {
+    min-height: 800px;
+}
+
+.container-fluid {
+    width: 600px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.weatherContent {
+    color: #ff0;
+}

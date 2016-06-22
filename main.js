@@ -35,14 +35,53 @@ $(document).ready(function () {
                 return letter.toUpperCase();
             });
 
+            var mainW = data.weather[0].main;
+
+            //Getting the wind speed in meters/sec to miles/hour
+            var windSpeed = data.wind.gust;
+            windSpeed = (windSpeed * 2.236936).toFixed(2);
+
+            console.log("Here is the type of weather " + mainW);
+
+
+            if(mainW === "Clouds") {
+                $('body').css('background-image', 'url("http://www.somersetcountygazette.co.uk/resources/images/4216738.jpg?display=1&htype=0&type=mc3")' );
+            } else if (mainW === "Clear") {
+                $('body').css('background-image', 'url("http://www.clouds365.com/blog/wp-content/uploads/2009/11/Oklahoma-Clear1.jpg")' );
+            } else if (mainW === "Rain") {
+                $('body').css('background-image', 'url("http://az616578.vo.msecnd.net/files/2016/05/28/636000076698153744-318535480_maxresdefault.jpg")' );
+            } else if (mainW === "Snow") {
+                $('body').css('background-image', 'url("http://az616578.vo.msecnd.net/files/2016/01/09/635879112155223228-319755513_635861833670816810507191518_6670-perfect-snow-1920x1080-nature-wallpaper.jpg")' );
+            } else if (mainW === "Thunderstorm") {
+                $('body').css('background-image', 'url("http://i.imgur.com/OT4cNAK.jpg")' );
+            }
+            
+            var tempSwap;
             var kelvin = data.main.temp;
             //Data from API is in Kelvin so I must convert to fahrenheit, and remove the decimal places
             var fahrenheit = (kelvin * (9/5) - 459.67).toFixed(0);
+            //Convert to celsius
+            var celsius = ((fahrenheit - 32)/ 1.8).toFixed(0);
             var city = data.name;
+
+            //Clicking the button will convert temp to C or F
+            $(".localWeather").html("Today's temperature is: " + fahrenheit + "&deg;F");
+            $('#getTemp').click(function() {
+                if(tempSwap === false) {
+                    $(".localWeather").html("Today's temperature is: " + celsius + "&deg;C");
+                    $('#getTemp').html('Fahrenheit')
+                    tempSwap = true;
+                } else {
+                    $(".localWeather").html("Today's temperature is: " + fahrenheit + "&deg;F");
+                    $('#getTemp').html('Celsius')
+                    tempSwap = false;
+                }
+            });
 
             //Display the data on the page
             $(".city").html(city);
-            $(".localWeather").html("Today's temperature is: " + fahrenheit + "&deg;");
+            $(".windSpeed").html("Wind " + windSpeed + " MPH");
+
             $(".weatherType").html(weatherType);
 
             //For testing

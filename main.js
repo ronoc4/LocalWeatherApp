@@ -55,7 +55,7 @@ $(document).ready(function () {
             } else if (mainW === "Thunderstorm") {
                 $('body').css('background-image', 'url("http://i.imgur.com/OT4cNAK.jpg")' );
             }
-            
+
             var tempSwap;
             var kelvin = data.main.temp;
             //Data from API is in Kelvin so I must convert to fahrenheit, and remove the decimal places
@@ -69,11 +69,11 @@ $(document).ready(function () {
             $('#getTemp').click(function() {
                 if(tempSwap === false) {
                     $(".localWeather").html("Today's temperature is: " + celsius + "&deg;C");
-                    $('#getTemp').html('Fahrenheit')
+                    $('#getTemp').html('Fahrenheit');
                     tempSwap = true;
                 } else {
                     $(".localWeather").html("Today's temperature is: " + fahrenheit + "&deg;F");
-                    $('#getTemp').html('Celsius')
+                    $('#getTemp').html('Celsius');
                     tempSwap = false;
                 }
             });

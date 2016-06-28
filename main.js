@@ -16,15 +16,18 @@
 $(document).ready(function () {
     var lat;
     var long;
-//Pull geolocation and set lat and long for user
-//  $.getJSON("http://ip-api.com/json", function (data2) {
-//         lat = data2.lat;
-//         long = data2.lon;
 
+    //Getting the user's location
     if ("geolocation" in navigator) {
 
         navigator.geolocation.getCurrentPosition(function (position) {
 
+            //Remove loading messages
+            $("#loadMessage").remove();
+            $(".loader").remove();
+            $("#getTemp").show();
+
+            //Create API URL
             lat = position.coords.latitude;
             long = position.coords.longitude;
             var apiKey = "552c7aa61e643cd3912d0b10ddeb3f58";
@@ -41,6 +44,7 @@ $(document).ready(function () {
                     return letter.toUpperCase();
                 });
 
+                //Getting the type of weather
                 var mainW = data.weather[0].main;
 
                 //Getting the wind speed in meters/sec to miles/hour
@@ -50,6 +54,7 @@ $(document).ready(function () {
                 console.log("Here is the type of weather " + mainW);
 
 
+                //Checking the type and changing the background image accordingly
                 if (mainW === "Clouds") {
                     $('body').css('background-image', 'url("http://www.somersetcountygazette.co.uk/resources/images/4216738.jpg?display=1&htype=0&type=mc3")');
                 } else if (mainW === "Clear") {
@@ -98,6 +103,7 @@ $(document).ready(function () {
 
         });
 
+        //Throw error if location is disabled
     } else {
         $(".city").textContent("Error! You must enable location tracking.");
     }
